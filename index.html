@@ -44,7 +44,7 @@
          <p data-aos="fade" data-aos-delay="100" data-aos-duration="1500">Akan melangsungkan pernikahan dalam:</p>
          <div class="simply-countdown mb-4" data-aos="fade" data-aos-delay="150" data-aos-duration="1500"></div>
          <h5 class="mt-4" data-aos="fade" data-aos-delay="100" data-aos-duration="1500">Kepada Yth,
-            <span>Bapak/Ibu/Saudara/i, </span></h5>
+            <span class="nama-tamu">Bapak/Ibu/Saudara/i</span></h5>
          <a href="#home" class="btn btn-md mt-4 bg-gradient border-1 border-dark-subtle shadow" onClick="enableScroll()"
             data-aos="fade" data-aos-delay="200" data-aos-duration="1500"><i class="bi bi-envelope-fill"></i>
             Buka Undangan</a>
@@ -568,24 +568,23 @@
       disableScroll();
    </script>
 
-   <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const nama = urlParams.get('n') || '';
-      const pronoun = urlParams.get('p') || 'Bapak/Ibu/Saudara/i';
 
-      // Menargetkan elemen kontainer nama
-      const namaContainer = document.querySelector('.hero h4 span');
-      if (namaContainer) {
-         // Mengatur teks pada elemen nama
-         namaContainer.innerText = `${pronoun} ${nama}`.trim().replace(/,$/, ',');
-      }
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const nama = decodeURIComponent(params.get('n') || '');
+  const pronoun = decodeURIComponent(params.get('p') || 'Bapak/Ibu/Saudara/i ~ ');
 
-      // Mengisi input nama jika elemen input ditemukan
-      const namaInput = document.querySelector('#nama');
-      if (namaInput) {
-         namaInput.value = nama;
-      }
-   </script>
+  const span = document.querySelector('.hero h5 span');
+  if (span) {
+    span.textContent = nama ? `${pronoun} ${nama}` : pronoun;
+  }
+
+  const namaInput = document.querySelector('#nama');
+  if (namaInput && nama) {
+    namaInput.value = nama;
+  }
+</script>
+
 
 </body>
 
